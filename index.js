@@ -1,3 +1,4 @@
+require('dotenv').config();
 // EXPRESS AND HTTP SERVER INIT VAR 
 const http = require('http');
 const express = require('express');

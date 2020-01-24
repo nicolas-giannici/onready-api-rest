@@ -28,8 +28,6 @@ let getActoresByIdPelicula = async(idPel) => {
     }
 
     return actores;
-
-
 };
 
 
@@ -109,9 +107,11 @@ app.get('/apiv1/peliculas', verQueryParams1, async(req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            ok: false,
+            error: error.code
+        });
     }
-
 });
 
 

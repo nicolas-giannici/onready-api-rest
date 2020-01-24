@@ -88,7 +88,7 @@ app.get('/apiv1/peliculas', verQueryParams1, async(req, res) => {
         let sqlGetPeliculasPaginadas = `SELECT * FROM (SELECT * FROM peliculas ORDER BY nombre ASC ) as pels LIMIT ${cantidad} OFFSET ${offset};`;
         response = await dbConnection.asyncQuery(sqlGetPeliculasPaginadas);
         let peliculas = response.results;
-        console.log(peliculas);
+
         for (let i = 0; i < peliculas.length; i++) {
             let pelId = peliculas[i].pelicula_id;
             let actores = await getActoresByIdPelicula(pelId);

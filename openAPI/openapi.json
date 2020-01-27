@@ -1,0 +1,206 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Nicolas Giannici",
+            "email": "nicolasgiannici@gmail.com",
+            "url": "https://example.com/"
+        }
+    },
+    "tags": [{
+        "name": "CRUD operations",
+        "description": "crud example"
+    }],
+    "servers": [{
+        "url": "http://localhost:5555",
+        "description": "LocalHost"
+    }],
+    "paths": {
+        "/apiv1/peliculas": {
+            "get": {
+                "operationId": "getPeliculas",
+                "summary": "Get a paginated list of peliculas",
+                "tags": ["CRUD operations"],
+                "parameters": [{
+                        "in": "query",
+                        "name": "pagina",
+                        "schema": {
+                            "type": "number",
+                            "minimum": 1
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "cantidad",
+                        "schema": {
+                            "type": "number",
+                            "maximum": 15,
+                            "minimum": 7
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/apiv1/peliculas/obtenerPorNombre": {
+            "get": {
+                "operationId": "getPeliculaPorNombre",
+                "summary": "Retorna un objeto Pelicula con la pelicula encontrada",
+                "tags": ["CRUD operations"],
+                "parameters": [{
+                    "in": "query",
+                    "name": "nombre",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "description": "El nombre de la pelicula a obtener."
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/apiv1/peliculas/nuevaPelicula": {
+            "post": {
+                "operationId": "PostNewPelicula",
+                "summary": "Crea una nueva pelicula con los datos ingresados",
+                "tags": ["CRUD operations"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "director": {
+                                        "type": "string"
+                                    },
+                                    "origen": {
+                                        "type": "string"
+                                    },
+                                    "fechaEstreno": {
+                                        "type": "string"
+                                    },
+                                    "reparto": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "nombre": {
+                                                    "type": "string"
+                                                },
+                                                "apellido": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/apiv1/peliculas/modificarPelicula": {
+            "post": {
+                "operationId": "PostUpdatePelicula",
+                "summary": "Actualiza los datos de una pelicula desde su id",
+                "tags": ["CRUD operations"],
+                "parameters": [{
+                    "in": "query",
+                    "name": "id",
+                    "required": true,
+                    "schema": {
+                        "type": "integer",
+                        "minimum": 1
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "director": {
+                                        "type": "string"
+                                    },
+                                    "origen": {
+                                        "type": "string"
+                                    },
+                                    "fechaEstreno": {
+                                        "type": "string"
+                                    },
+                                    "reparto": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "nombre": {
+                                                    "type": "string"
+                                                },
+                                                "apellido": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/apiv1/peliculas/eliminarPelicula": {
+            "delete": {
+                "operationId": "DeletePelicula",
+                "summary": "Elimina una pelicula desde su id",
+                "tags": ["CRUD operations"],
+                "parameters": [{
+                    "in": "query",
+                    "name": "id",
+                    "required": true,
+                    "schema": {
+                        "type": "number",
+                        "minimum": 1
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
